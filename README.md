@@ -29,7 +29,7 @@ Contact: Contact form and social media links.
 
 ### Credits
 
-Template: HTML 5 UP by ajlknhttps://aj.lkn.io/
+Template: HTML 5 UP by ajlkn (https://aj.lkn.io/)
 
 
 Icons: Font Awesome
