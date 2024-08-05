@@ -2,7 +2,7 @@
 
 ### Overview
 
-This portfolio website showcases my skills, experience, and projects as a Network Administrator. It is built using a responsive HTML5 template from HTML 5 UP by ajlkn.
+This portfolio website showcases my skills, experience, and projects as a Network Administrator.
 #
 
 ### Features
