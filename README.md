@@ -1,10 +1,9 @@
 # Mubashir Ishimwe Portfolio Website README
-Overview
 
-This portfolio website showcases Mubashir Ishimwe's skills, experience, and projects as a Network Administrator. It is built using a responsive HTML5 template from HTML5 UP by ajlkn.
+Overview
+This portfolio website showcases my skills, experience, and projects as a Network Administrator. It is built using a responsive HTML5 template from HTML 5 UP by ajlkn.
 
 Features
-Responsive Design: Adapts to any device size.
 Single Page Layout: Sections for About, Skills, Experience, and Contact.
 Contact Form: Integrated with Formspree.io for easy communication.
 Pre-styled Elements: Consistent and professional appearance.
@@ -17,8 +16,7 @@ Experience: Professional and volunteer roles.
 Contact: Contact form and social media links.
 
 Credits
-Template: HTML5 UP by ajlkn
-Images: Unsplash
+Template: HTML 5 UP by ajlkn
 Icons: Font Awesome
 Libraries: jQuery, Scrollex, Responsive Tools
 
