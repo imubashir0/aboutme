@@ -1,15 +1,28 @@
-# Welcome! I'm Mubashir Ishimwe
+# Mubashir Ishimwe Portfolio Website README
+Overview
 
-I can be described as...
+This portfolio website showcases Mubashir Ishimwe's skills, experience, and projects as a Network Administrator. It is built using a responsive HTML5 template from HTML5 UP by ajlkn.
 
-🔐 network security advocate — dedicated to ensuring robust security measures across all networks
+Features
+Responsive Design: Adapts to any device size.
+Single Page Layout: Sections for About, Skills, Experience, and Contact.
+Contact Form: Integrated with Formspree.io for easy communication.
+Pre-styled Elements: Consistent and professional appearance.
 
-🖥️ server management expert — proficient in both Linux and Windows server environments
+Sections
+Header: Profile image, navigation links.
+About Me: Introduction, project details on network security and Discord server management.
+Skills: List of technical skills.
+Experience: Professional and volunteer roles.
+Contact: Contact form and social media links.
 
-🤝 open-source advocate — capable in JavaScript, HTML, and Python, developing efficient network solutions
+Credits
+Template: HTML5 UP by ajlkn
+Images: Unsplash
+Icons: Font Awesome
+Libraries: jQuery, Scrollex, Responsive Tools
 
-🤖 bot developer — created and configured bots to enhance community engagement on Discord
+License
+Licensed under the Creative Commons Attribution 3.0 Unported License. Free for personal and commercial use with attribution.
 
-🎮 gaming enthusiast — enjoys managing gaming communities and fostering lively interactions
-
-📚 lifelong learner — always eager to expand my knowledge and tackle new challenges
+For questions or feedback, contact Mubashir Ishimwe at ishi0400@algonquinlive.com.
