@@ -2,12 +2,12 @@
 
 ### Overview
 
-This portfolio website showcases my skills, experience, and projects as a Network Administrator.
+This portfolio website showcases my skills, experiences, and projects as a Network Administrator.
 #
 
 ### Features
 
-Single Page Layout: Sections for About, Skills, Experience, and Contact.
+Single Page Layout: Sections for About, Skills, Experiences, and Contact.
 
 Contact Form: Integrated with Formspree.io for easy communication.
 
@@ -21,6 +21,8 @@ Header: Profile image, navigation links.
 About Me: Introduction, project details on network security and Discord server management.
 
 Skills: List of technical skills.
+
+Projects: List of projects
 
 Experience: Professional and volunteer roles.
 
