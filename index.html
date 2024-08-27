@@ -123,10 +123,15 @@
                                 <div class="col-12"><textarea name="message" id="message" placeholder="Message" rows="6"></textarea></div>
                                 <div class="col-12">
                                     <ul class="actions">
-                                        <li><input type="submit" class="primary" value="Send Message" /></li>
                                         <li><input type="reset" value="Reset Form" /></li>
+                                        <li><input type="button" class="primary" value="Encrypt" id="encrypt-btn" /></li>
+                                        <li><input type="button" class="primary" value="Copy Public Key" id="copy-key-btn" /></li>
+                                        <li><input type="submit" class="primary" value="Send Message" /></li>
                                     </ul>
                                 </div>
+                            </div>
+                            <div class="col-12">
+                                <textarea id="public-key" rows="6" readonly></textarea>
                             </div>
                         </form>
                     </div>
