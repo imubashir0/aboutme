@@ -1,6 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const publicKeyArmored = 
-        `-----BEGIN PGP PUBLIC KEY BLOCK-----
+document.addEventListener('DOMContentLoaded', async () => {
+    // Ensure OpenPGP is loaded
+    if (typeof openpgp === 'undefined') {
+        console.error('OpenPGP.js is not loaded!');
+        return;
+    }
+
+    const publicKeyArmored = `-----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mQINBGbOWSQBEACrOcN/aZhQOfSg8qw8yDYlMytwHEeWQKrqvPMyh6mH0bIOclVo
 AJ5wLb/G1/BCDEFYiuGCSBE40k2tOzy0sI3AgoofGyvzVl2lwFlQOSoWqT72ygqM
@@ -51,29 +56,43 @@ xndToCMc7AKcnnu0K07gZlIhCNlQ4rYNKZ7IUnktVJx2Lo7/CIvNlMmiDXgNyp3S
 HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
 9fPPMVLWcscllU/ogT1L01L0OopzobF3
 =VgTY
------END PGP PUBLIC KEY BLOCK-----`;
+-----END PGP PUBLIC KEY BLOCK-----`; 
+
     document.getElementById('public-key').textContent = publicKeyArmored;
+
+    // Function to encrypt a message
+    async function encryptMessage(message) {
+        const publicKey = await openpgp.readKey({ armoredKey: publicKeyArmored });
+        const encrypted = await openpgp.encrypt({
+            message: await openpgp.createMessage({ text: message }),
+            encryptionKeys: publicKey
+        });
+        return encrypted;
+    }
 
     // Handle the Encrypt button click
     document.getElementById('encrypt-btn').addEventListener('click', async function () {
-        // Fetch the user's input
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('subject').value;
-        const message = document.getElementById('message').value;
+        try {
+            // Fetch the user's input
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
 
-        // Combine all form data into a single string for encryption
-        const formData = `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}`;
+            // Encrypt each field
+            const encryptedName = await encryptMessage(name);
+            const encryptedEmail = await encryptMessage(email);
+            const encryptedSubject = await encryptMessage(subject);
+            const encryptedMessage = await encryptMessage(message);
 
-        // Encrypt the form data using the public key
-        const publicKey = await openpgp.readKey({ armoredKey: publicKeyArmored });
-        const encrypted = await openpgp.encrypt({
-            message: await openpgp.createMessage({ text: formData }),
-            encryptionKeys: publicKey
-        });
-
-        // Replace the original message with the encrypted message
-        document.getElementById('message').value = encrypted;
+            // Update the form fields with the encrypted values
+            document.getElementById('name').value = encryptedName;
+            document.getElementById('email').value = encryptedEmail;
+            document.getElementById('subject').value = encryptedSubject;
+            document.getElementById('message').value = encryptedMessage;
+        } catch (error) {
+            console.error('Encryption error:', error);
+        }
     });
 
     // Handle the Copy Public Key button click
@@ -85,26 +104,39 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
     });
 
     // Handle the form submission
-    document.getElementById('contact-form').addEventListener('submit', function (event) {
+    document.getElementById('contact-form').addEventListener('submit', async function (event) {
         event.preventDefault();
 
-        // Get the encrypted message from the textarea
-        const encryptedMessage = document.getElementById('message').value;
+        try {
+            // Fetch the encrypted values from the form
+            const encryptedName = document.getElementById('name').value;
+            const encryptedEmail = document.getElementById('email').value;
+            const encryptedSubject = document.getElementById('subject').value;
+            const encryptedMessage = document.getElementById('message').value;
 
-        // Send the encrypted data to your server
-        fetch('https://yourserver.com/submit', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ encryptedMessage })
-        }).then(response => {
-            if (response.ok) {
-                alert('Message sent successfully!');
-            } else {
+            // Send the encrypted data to Formspree
+            fetch('https://formspree.io/f/manwokdq', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: encryptedName,
+                    email: encryptedEmail,
+                    subject: encryptedSubject,
+                    message: encryptedMessage
+                })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Message sent successfully!');
+                } else {
+                    alert('Error sending message.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
                 alert('Error sending message.');
-            }
-        }).catch(error => {
-            console.error('Error:', error);
-            alert('Error sending message.');
-        });
+            });
+        } catch (error) {
+            console.error('Submission error:', error);
+            alert('Error submitting form.');
+        }
     });
 });
