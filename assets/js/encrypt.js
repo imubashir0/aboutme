@@ -90,13 +90,11 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
 
             // Encrypt each field
             const encryptedName = await encryptMessage(name);
-            const encryptedEmail = await encryptMessage(email);
             const encryptedSubject = await encryptMessage(subject);
             const encryptedMessage = await encryptMessage(message);
 
             // Create hidden fields with encrypted data
             createHiddenField('encrypted-name', encryptedName);
-            createHiddenField('encrypted-email', encryptedEmail);
             createHiddenField('encrypted-subject', encryptedSubject);
             createHiddenField('encrypted-message', encryptedMessage);
 
@@ -124,7 +122,6 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
     // Function to remove plaintext fields from the form
     function removePlaintextFields() {
         document.getElementById('name').remove();
-        document.getElementById('email').remove();
         document.getElementById('subject').remove();
         document.getElementById('message').remove();
     }
