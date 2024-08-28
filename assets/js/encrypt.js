@@ -58,7 +58,7 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
 =VgTY
 -----END PGP PUBLIC KEY BLOCK-----`; 
 
-    document.getElementById('public-key').textContent = publicKeyArmored;
+   document.getElementById('public-key').textContent = publicKeyArmored;
 
     // Function to encrypt a message
     async function encryptMessage(message) {
@@ -70,7 +70,15 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
         return encrypted;
     }
 
-    // Handle the Encrypt button click
+    // Handle the Copy Public Key button click
+    document.getElementById('copy-key-btn').addEventListener('click', function () {
+        const publicKeyTextarea = document.getElementById('public-key');
+        publicKeyTextarea.select();
+        document.execCommand('copy');
+        alert('Public key copied to clipboard!');
+    });
+
+    // Handle the "Send Encrypted Message" button click
     document.getElementById('encrypt-btn').addEventListener('click', async function () {
         try {
             // Fetch the user's input
@@ -85,58 +93,33 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
             const encryptedSubject = await encryptMessage(subject);
             const encryptedMessage = await encryptMessage(message);
 
-            // Update the form fields with the encrypted values
-            document.getElementById('name').value = encryptedName;
-            document.getElementById('email').value = encryptedEmail;
-            document.getElementById('subject').value = encryptedSubject;
-            document.getElementById('message').value = encryptedMessage;
-        } catch (error) {
-            console.error('Encryption error:', error);
-        }
-    });
-
-    // Handle the Copy Public Key button click
-    document.getElementById('copy-key-btn').addEventListener('click', function () {
-        const publicKeyTextarea = document.getElementById('public-key');
-        publicKeyTextarea.select();
-        document.execCommand('copy');
-        alert('Public key copied to clipboard!');
-    });
-
-    // Handle the form submission
-    document.getElementById('contact-form').addEventListener('submit', async function (event) {
-        event.preventDefault();
-
-        try {
-            // Fetch the encrypted values from the form
-            const encryptedName = document.getElementById('name').value;
-            const encryptedEmail = document.getElementById('email').value;
-            const encryptedSubject = document.getElementById('subject').value;
-            const encryptedMessage = document.getElementById('message').value;
+            // Prepare data to send
+            const encryptedData = {
+                name: encryptedName,
+                email: encryptedEmail,
+                subject: encryptedSubject,
+                message: encryptedMessage
+            };
 
             // Send the encrypted data to Formspree
             fetch('https://formspree.io/f/manwokdq', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: encryptedName,
-                    email: encryptedEmail,
-                    subject: encryptedSubject,
-                    message: encryptedMessage
-                })
+                body: JSON.stringify(encryptedData)
             }).then(response => {
                 if (response.ok) {
-                    alert('Message sent successfully!');
+                    alert('Encrypted message sent successfully!');
                 } else {
-                    alert('Error sending message.');
+                    alert('Error sending encrypted message.');
                 }
             }).catch(error => {
                 console.error('Error:', error);
-                alert('Error sending message.');
+                alert('Error sending encrypted message.');
             });
+
         } catch (error) {
-            console.error('Submission error:', error);
-            alert('Error submitting form.');
+            console.error('Encryption or submission error:', error);
+            alert('Error processing form.');
         }
     });
 });
