@@ -70,13 +70,18 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
         return encrypted;
     }
     const publicKeyTextarea = document.getElementById('public-key');
-    // Handle the Copy Public Key button click
-    document.getElementById('copy-key-btn').addEventListener('click', function () {
+     // Function to copy the public key to the clipboard
+    function copyPublicKey() {
+        const publicKeyTextarea = document.getElementById('public-key');
+        publicKeyTextarea.style.display = 'block'; // Temporarily display to select
         publicKeyTextarea.select();
         document.execCommand('copy');
+        publicKeyTextarea.style.display = 'none'; // Hide again after copying
         alert('Public key copied to clipboard!');
-    });
-
+    }
+ // Attach the copy function to the "public key" span
+    document.getElementById('copy-public-key').addEventListener('click', copyPublicKey);
+    
      // Handle the "Send Encrypted Message" button click
     document.getElementById('encrypt-btn').addEventListener('click', async function (event) {
         event.preventDefault();
