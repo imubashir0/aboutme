@@ -78,8 +78,10 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
         alert('Public key copied to clipboard!');
     });
 
-    // Handle the "Send Encrypted Message" button click
-    document.getElementById('encrypt-btn').addEventListener('click', async function () {
+     // Handle the "Send Encrypted Message" button click
+    document.getElementById('encrypt-btn').addEventListener('click', async function (event) {
+        event.preventDefault();
+
         try {
             // Fetch the user's input
             const name = document.getElementById('name').value;
@@ -93,33 +95,39 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
             const encryptedSubject = await encryptMessage(subject);
             const encryptedMessage = await encryptMessage(message);
 
-            // Prepare data to send
-            const encryptedData = {
-                name: encryptedName,
-                email: encryptedEmail,
-                subject: encryptedSubject,
-                message: encryptedMessage
-            };
+            // Create hidden fields with encrypted data
+            createHiddenField('encrypted-name', encryptedName);
+            createHiddenField('encrypted-email', encryptedEmail);
+            createHiddenField('encrypted-subject', encryptedSubject);
+            createHiddenField('encrypted-message', encryptedMessage);
 
-            // Send the encrypted data to Formspree
-            fetch('https://formspree.io/f/manwokdq', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(encryptedData)
-            }).then(response => {
-                if (response.ok) {
-                    alert('Encrypted message sent successfully!');
-                } else {
-                    alert('Error sending encrypted message.');
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-                alert('Error sending encrypted message.');
-            });
+            // Remove plaintext fields from the form to avoid sending plaintext data
+            removePlaintextFields();
+
+            // Submit the form with encrypted fields
+            document.getElementById('contact-form').submit();
 
         } catch (error) {
             console.error('Encryption or submission error:', error);
             alert('Error processing form.');
         }
+    });
+
+    // Function to create a hidden form field
+    function createHiddenField(name, value) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value;
+        document.getElementById('contact-form').appendChild(input);
+    }
+
+    // Function to remove plaintext fields from the form
+    function removePlaintextFields() {
+        document.getElementById('name').remove();
+        document.getElementById('email').remove();
+        document.getElementById('subject').remove();
+        document.getElementById('message').remove();
+    }
     });
 });
