@@ -71,14 +71,18 @@ const publicKeyTextarea = document.getElementById('public-key');
     }
     const publicKeyTextarea = document.getElementById('public-key');
       function copyPublicKey() {
-        navigator.clipboard.writeText(publicKeyArmored)
-            .then(() => {
-                alert('Public key copied to clipboard!');
-            })
-            .catch(err => {
-                console.error('Failed to copy public key: ', err);
-            });
-    }
+    // Get the textarea element that contains the public key text
+    const publicKeyTextarea = document.getElementById('public-key');
+
+    // Select the text inside the textarea
+    publicKeyTextarea.select();
+
+    // Copy the selected text to the clipboard
+    document.execCommand('copy');
+
+    // Provide feedback to the user
+    alert('Public key copied to clipboard!');
+}
     }
  // Attach the copy function to the "public key" span
     document.getElementById('copy-public-key').addEventListener('click', copyPublicKey);
