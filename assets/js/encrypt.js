@@ -69,7 +69,7 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
         });
         return encrypted;
     }
-
+    const publicKeyTextarea = document.getElementById('public-key');
     // Handle the Copy Public Key button click
     document.getElementById('copy-key-btn').addEventListener('click', function () {
         const publicKeyTextarea = document.getElementById('public-key');
