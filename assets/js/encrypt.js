@@ -70,25 +70,15 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
         return encrypted;
     }
     const publicKeyTextarea = document.getElementById('public-key');
-     function copyPublicKey() {
-        // Get the hidden div element that contains the public key text
-        const hiddenDiv = document.querySelector('div[hidden]');
-
-        // Create a temporary textarea element to copy the text from the hidden div
-        const tempTextarea = document.createElement('textarea');
-        tempTextarea.value = hiddenDiv.textContent; // Get text content from the hidden div
-        document.body.appendChild(tempTextarea); // Append textarea to the body
-
-        // Select and copy the text
-        tempTextarea.select();
-        document.execCommand('copy');
-
-        // Remove the temporary textarea after copying
-        document.body.removeChild(tempTextarea);
-
-        // Provide feedback to the user
-        alert('Public key copied to clipboard!');
-                                }
+      function copyPublicKey() {
+        navigator.clipboard.writeText(publicKeyArmored)
+            .then(() => {
+                alert('Public key copied to clipboard!');
+            })
+            .catch(err => {
+                console.error('Failed to copy public key: ', err);
+            });
+    }
     }
  // Attach the copy function to the "public key" span
     document.getElementById('copy-public-key').addEventListener('click', copyPublicKey);
