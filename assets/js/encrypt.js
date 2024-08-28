@@ -59,7 +59,7 @@ HOfrZGEN00WYWSo4b1pIvE7zsptOvtwtmXK7jE5tkz44DWjHfGPbYXH6TODss1xv
 -----END PGP PUBLIC KEY BLOCK-----`; 
 
    document.getElementById('public-key').textContent = publicKeyArmored;
-
+const publicKeyTextarea = document.getElementById('public-key');
     // Function to encrypt a message
     async function encryptMessage(message) {
         const publicKey = await openpgp.readKey({ armoredKey: publicKeyArmored });
