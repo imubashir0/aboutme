@@ -3308,5 +3308,18 @@ input[type="button"]:disabled,
 			.button {
 				padding: 0;
 			}
+		/* Hyperlink Hover Effect */
+
+			.highlight-link-hover {
+			color: blue; 
+			text-decoration: 
+			underline;
+			}
+
+			.highlight-link-hover:hover {
+  			color: darkblue;
+  			font-weight: bold;
+  			text-decoration: none;
+			}
 
 	}
