@@ -1,4 +1,4 @@
-# Mubashir Ishimwe Portfolio Website README
+# Portfolio Website README
 
 ### Overview
 
