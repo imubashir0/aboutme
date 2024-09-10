@@ -2,7 +2,7 @@
 
 ### Overview
 
-This portfolio website showcases my skills, experiences, and projects as a Network Administrator.
+This portfolio website showcases my skills, experiences, and projects as a Systems Analyst.
 #
 
 ### Features
