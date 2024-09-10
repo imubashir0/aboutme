@@ -18,7 +18,7 @@ Pre-styled Elements: Consistent and professional appearance.
 
 Header: Profile image, navigation links.
 
-About Me: Introduction, project details on network security and Discord server management.
+About Me: Introduction, project details on network security and Discord bot development.
 
 Skills: List of technical skills.
 
