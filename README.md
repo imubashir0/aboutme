@@ -2,7 +2,7 @@
 
 ### Overview
 
-This portfolio website showcases my skills, experiences, and projects as a IT System Technician.
+This portfolio website showcases my skills, experiences, and projects as an IT System Technician.
 #
 
 ### Features
